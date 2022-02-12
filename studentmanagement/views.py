@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,HttpResponse
 from app.emailbackend import Emailbackend
 from django.contrib.auth import authenticate,logout,login
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from app.models import *
 
 
@@ -34,6 +35,9 @@ def doLogout(request):
     return redirect('loginpage')
 
 
+
+
+@login_required(login_url="/")
 def profile(request):
     user=Customuser.objects.get(id=request.user.id)
     context={
@@ -41,9 +45,11 @@ def profile(request):
     }
     return render(request, 'main/profile.html',context)
 
+
+@login_required(login_url="/")
 def profileupdate(request):
     if request.method == 'POST':
-        profile_pic=request.FILES.get("profile_pic")
+        profile_pic=request.FILES.get("profilepic")
         first_name=request.POST.get("firstname")
         last_name=request.POST.get("lastname")
         # email=request.POST.get("email")
@@ -55,12 +61,14 @@ def profileupdate(request):
             customUser.first_name=first_name
             customUser.last_name=last_name
             customUser.profile_pic=profile_pic
-            if password == None and password == '':
+            if password != None and password != "":
                 customUser.set_password(password)
+            # if profile_pic != None and profile_pic != "":
+            #     print('yes')
+            #     
             customUser.save()
             messages.success(request,"Your Profile Updated Successfully")
-            redirect("profileupdate")
-            print(profile_pic)
+            return redirect("profileupdate")
             
         except:
             messages.error(request,"Fail to update your Profile")
