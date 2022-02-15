@@ -4,49 +4,49 @@
     <div class="col-sm-12">
        <div class="card">
           <div class="card-body">
-             <form method="POST" action="{% url 'addstudent'%}" enctype="multipart/form-data">
+             <form method="POST" action="{% url 'updatestudent' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
                    <div class="col-12">
-                      <h5 class="form-title"><span>Add Student</span></h5>
+                      <h5 class="form-title"><span>Edit Student</span></h5>
                       {% include 'includes/errormessage.html'%}
                    </div>
                    
                    <div class="col-12 col-sm-6">
                       <div class="form-group">
                          <label>First Name</label>
-                         <input type="text" class="form-control" name="first_name">
+                         <input type="text" class="form-control" name="first_name" value="{% for student in students%} {{student.admin.first_name}} {% endfor %}">
                       </div>
                    </div>
                    <div class="col-12 col-sm-6">
                       <div class="form-group">
                          <label>Last Name</label>
-                         <input type="text" class="form-control" name="last_name">
+                         <input type="text" class="form-control" name="last_name" value="{% for student in students%} {{student.admin.last_name}} {% endfor %}">
                       </div>
                    </div>
                    <div class="col-12 col-sm-6">
                     <div class="form-group">
                        <label>Email</label>
-                       <input type="email" class="form-control" name="email">
+                       <input type="email" class="form-control" name="email" value="{% for student in students%} {{student.admin.email}} {% endfor %}">
                     </div>
                  </div>
                  <div class="col-12 col-sm-6">
                     <div class="form-group">
                        <label>Username</label>
-                       <input type="text" class="form-control" name="username">
+                       <input type="text" class="form-control" name="username" value="{% for student in students%} {{student.admin.username}} {% endfor %}">
                     </div>
                  </div>
                  <div class="col-12 col-sm-6">
                     <div class="form-group">
                        <label>Password</label>
-                       <input type="text" class="form-control" name="password">
+                       <input type="text" class="form-control" name="password" placeholder="Fill only if you want to change the password">
                     </div>
                  </div>
                  <div class="col-12 col-sm-6">
                     <div class="form-group">
-                       <label>Date of Birth</label>
+                       <label>Date of Birth {{student.student_dob}}</label>
                        <div>
-                          <input type="date" class="form-control" name="DOB_student">
+                          <input type="date" class="form-control" name="DOB_student" value="{% for student in students %} {{student.student_dob}} {% endfor %}">
                        </div>
                     </div>
                  </div>
@@ -59,8 +59,8 @@
                    <div class="col-12 col-sm-6">
                       <div class="form-group">
                          <label>Gender</label>
-                         <select class="form-control" name="gender">
-                            <option>Select Gender</option>
+                         <select class="form-control" name="gender" >
+                            <option>-------Select Gender-----</option>
                             <option>Male</option>
                             <option>Female</option>
                             <option>Others</option>
@@ -71,7 +71,7 @@
                       <div class="form-group">
                          <label>Course</label>
                          <select class="form-control" name="course_id">
-                           <option>Select Course</option>
+                           <option>-----------Select Course-----------</option>
                            {% for course in course %}
                             <option value="{{course.id}}">{{course.name}}</option>
                            {% endfor %}
@@ -82,8 +82,8 @@
                       <div class="form-group">
                          <label>Session Year</label>
                          <select class="form-control" name="session_year_id">
-                            <option>Session Year</option>
-                            {% for session in session_year%}
+                            <option>------Session Year-------</option>
+                            {% for session in session %}
                             <option value="{{session.id}}">{{session.session_start}} To {{session.session_end}}</option>
                             {% endfor %}
                          </select>
@@ -120,7 +120,7 @@
                    <div class="col-12 col-sm-6">
                       <div class="form-group">
                          <label>Mobile Number</label>
-                         <input type="text" class="form-control" name="student_mobile">
+                         <input type="text" class="form-control" name="student_mobile"  value="{% for student in students%} {{student.student_mobile_no}} {% endfor %}">
                       </div>
                    </div>
                    
@@ -128,7 +128,7 @@
                     <div class="col-12 col-sm-6">
                         <div class="form-group">
                            <label>* Optional Mobile Number</label>
-                           <input type="text" class="form-control" name="student_optional_mobile">
+                           <input type="text" class="form-control" name="student_optional_mobile" value="{% for student in students%} {{student.student_optional_mobile_no}} {% endfor %}">
                         </div>
                      </div>
                  <!-- <div class="col-12 col-sm-6">
@@ -152,13 +152,13 @@
                    <div class="col-12 col-sm-6">
                     <div class="form-group">
                        <label> Permanent Address</label>
-                       <textarea class="form-control" name="permanent_address"></textarea>
+                       <textarea class="form-control" name="permanent_address">{% for student in students%} {{student.permanent_address}} {% endfor %}</textarea>
                     </div>
                  </div>
                  <div class="col-12 col-sm-6">
                     <div class="form-group">
                        <label> Present Address</label>
-                       <textarea class="form-control" name="present_address"></textarea>
+                       <textarea class="form-control" name="present_address">{% for student in students%} {{student.present_address}} {% endfor %}</textarea>
                     </div>
                  </div>
                    <!-- </div>
@@ -226,7 +226,7 @@
                       </div>
                    </div> -->
                    <div class="col-12">
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" class="btn btn-primary">Update</button>
                    </div>
                 </div>
              </form>
