@@ -97,7 +97,7 @@
             {% if user.profile_pic == "" %}
              <span class="user-img"><img class="rounded-circle" src="{% static 'assets/default-img/user-default.png' %}" width="31" alt="{{user.first_name}}&nbsp;{{user.last_name}}"></span>
             {% else %}
-             <span class="user-img"><img class="rounded-circle" src="{{user.profile_pic}}" width="31" alt="{{user.first_name}}&nbsp;{{user.last_name}}"></span>
+             <span class="user-img"><img class="rounded-circle" src="{{user.profile_pic.url}}" width="31" alt="{{user.first_name}}&nbsp;{{user.last_name}}"></span>
             {% endif %} 
             </a>
              <div class="dropdown-menu">
@@ -106,7 +106,7 @@
                      {% if user.profile_pic == "" %}
                       <img src="{% static 'assets/default-img/user-default.png' %}" alt="{{user.first_name}}&nbsp;{{user.last_name}}" class="avatar-img rounded-circle">
                       {% else %}
-                      <img src="{{user.profile_pic}}" alt="User Image" class="avatar-img rounded-circle">
+                      <img src="{{user.profile_pic.url}}" alt="User Image" class="avatar-img rounded-circle">
                       {% endif %}
                    </div>
                    <div class="user-text">

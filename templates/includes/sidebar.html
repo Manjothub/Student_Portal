@@ -22,17 +22,15 @@
                 <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Teachers</span> <span class="menu-arrow"></span></a>
                 <ul>
                    <li><a href="#">Teacher List</a></li>
-                   <!-- <li><a href="teacher-details.html">Teacher View</a></li> -->
-                   <li><a href="#">Teacher Add</a></li>
+                   <li><a href="{% url 'addTeacher' %}">Teacher Add</a></li>
                    <!-- <li><a href="edit-teacher.html">Teacher Edit</a></li> -->
                 </ul>
              </li>
              <li class="submenu">
                <a href="#"><i class="fas fa-book"></i><span> Course</span> <span class="menu-arrow"></span></a>
                 <ul>
-                   <li><a href="departments.html">Course List</a></li>
-                   <li><a href="add-department.html">Course Add</a></li>
-                   <li><a href="edit-department.html">Course Edit</a></li>
+                   <li><a href="{% url 'viewcourse' %}">Course List</a></li>
+                   <li><a href="{% url 'addcourse'  %}">Course Add</a></li>
                 </ul> 
                
                <!-- Next Update -->

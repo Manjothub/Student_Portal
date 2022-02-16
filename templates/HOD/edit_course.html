@@ -1,0 +1,49 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block body %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Edit Course</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'hodpage' %}">Course</a></li>
+                    <li class="breadcrumb-item active">Add Course</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{% url 'updatecourse' %}" >
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="form-title"><span>Course Information</span></h5>
+                                {% include 'includes/errormessage.html'%}
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Course Name</label>
+                                    <input type="text" class="form-control" name="name" value="{% for course in courses %} {{course.name}} {% endfor %}" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</div>
+
+{% endblock %}
