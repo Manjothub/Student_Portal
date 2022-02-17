@@ -190,4 +190,6 @@ def deletecourses(request,id):
 
 @login_required(login_url="/")
 def addTeacher(request):
+    # if request.method == 'POST':
+        
     return render(request,'HOD/add_teacher.html')
