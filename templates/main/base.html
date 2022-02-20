@@ -35,4 +35,11 @@
     <script src="{% static 'assets/plugins/apexchart/apexcharts.min.js' %}"></script>
     <script src="{% static 'assets/plugins/apexchart/chart-data.js' %}"></script>
     <script src="{% static 'assets/js/script.js' %}"></script>
+    <script src="{% static 'assets/plugins/datatables/datatables.min.js'%}"></script>
+    <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#table_id').dataTable();
+    });
+</script>
 </body>

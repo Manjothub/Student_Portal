@@ -5,16 +5,16 @@
     <div class="page-header">
        <div class="row align-items-center">
           <div class="col">
-             <h3 class="page-title">Students</h3>
+             <h3 class="page-title">Teachers</h3>
              <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{% url 'hodpage' %}">Dashboard</a></li>
-                <li class="breadcrumb-item active">Students</li>
+                <li class="breadcrumb-item active">Teachers</li>
              </ul>
           </div>
           
           <div class="col-auto text-right float-right ml-auto">
              <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
-             <a href="{% url 'addstudent' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+             <a href="{% url 'addTeacher' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
           </div>
        </div>
        {% include 'includes/errormessage.html'%}
@@ -32,44 +32,42 @@
                             <th>DOB</th>
                             <th>Gender</th>
                             <th>Email</th>
-                            <th>Course</th>
-                            <th>Session Start</th>
-                            <th>Session End</th>
                             <th>Mobile Number</th>
-                            <th>Permanent Address</th>
-                            <th>Present Address</th>
+                            <th>Joining Date</th>
+                            <th>Qualification</th>
+                            <th>Experience</th>
+                            <th>Address</th>
                             <th>Created At</th>
                             <th>Updated At</th>
                             <th class="text-right">Action</th>
                          </tr>
                       </thead>
                       <tbody>
-                          {% for student in students %}
+                          {% for teacher in teachers %}
                          <tr>
-                             <td>{{student.id}}</td>
+                             <td>{{teacher.id}}</td>
                             <td>
                                <h2 class="table-avatar">
-                                  <a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src={{student.admin.profile_pic.url}} alt="User Image"></a>
-                                  <a href="#">{{student}}</a>
+                                  <a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src={{teacher.admin.profile_pic.url}} alt="User Image"></a>
+                                  <a href="#">{{teacher}}</a>
                                </h2>
                             </td>
-                            <td>{{student.student_dob}}</td>
-                            <td>{{student.gender}}</td>
-                            <td>{{student.admin.email}}</td>
-                            <td>{{student.course_id}}</td>
-                            <td>{{student.session_id.session_start}}</td>
-                            <td>{{student.session_id.session_end}}</td>
-                            <td>{{student.student_mobile_no}}&nbsp;&nbsp;{{student.student_optional_mobile_no}}</td>
-                            <td>{{student.permanent_address}}</td>
-                            <td>{{student.present_address}}</td>
-                            <td>{{student.created_at}}</td>
-                            <td>{{student.updated_at}}</td>
+                            <td>{{teacher.staff_dob}}</td>
+                            <td>{{teacher.staff_}}</td>
+                            <td>{{teacher.admin.email}}</td>
+                            <td>{{teacher.staff_mobile_no}}</td>
+                            <td>{{teacher.staff_joining_date}}</td>
+                            <td>{{teacher.staff_qualification}}</td>
+                            <td>{{teacher.staff_experience}}</td>
+                            <td>{{teacher.staff_address}}</td>
+                            <td>{{teacher.created_at}}</td>
+                            <td>{{teacher.updated_at}}</td>
                             <td class="text-right">
                                <div class="actions">
-                                  <a href="{% url 'editstudent' student.id %}" class="btn btn-sm bg-success-light mr-2">
+                                  <a href="{% url 'editTeacher' teacher.id %}" class="btn btn-sm bg-success-light mr-2">
                                   <i class="fas fa-pen"></i>
                                   </a>
-                                  <a href="{% url 'deletestudent' student.id %}" class="btn btn-sm bg-danger-light">
+                                  <a href="{% url 'deleteTeacher' teacher.id %}" class="btn btn-sm bg-danger-light">
                                   <i class="fas fa-trash"></i>
                                   </a>
                                </div>

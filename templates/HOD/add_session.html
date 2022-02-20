@@ -1,0 +1,54 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block body %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Add Session</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Session</a></li>
+                    <li class="breadcrumb-item active">Add Session</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{% url 'addSession' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="form-title"><span>Session Information</span></h5>
+                                {% include 'includes/errormessage.html'%}
+                            </div>
+                            
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Session Start</label>
+                                    <input type="date" class="form-control" name="session_start"  required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Session End</label>
+                                    <input type="date" class="form-control" name="session_end"  required>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Add Session</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

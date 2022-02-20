@@ -8,15 +8,16 @@
              <h3 class="page-title">Course List</h3>
              <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{% url 'hodpage' %}">Dashboard</a></li>
-                <li class="breadcrumb-item active">Courses</li>
+                <li class="breadcrumb-item active">Subjects</li>
              </ul>
           </div>
           <div class="col-auto text-right float-right ml-auto">
              <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
-             <a href="{% url 'addcourse' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
-          </div>
+             <a href="{% url 'addSubject' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+          </div> 
        </div>
     </div>
+    {% include 'includes/errormessage.html'%}
     <div class="row">
        <div class="col-sm-12">
           <div class="card card-table">
@@ -26,29 +27,33 @@
                       <thead>
                          <tr>
                             <th>ID</th>
+                            <th>Subject Name</th>
                             <th>Course Name</th>
+                            <th>Staff Name</th>
                             <th>Created at</th>
                             <th>Updated at</th>
                             <th class="text-right">Action</th>
                          </tr>
                       </thead>
                       <tbody>
-                        {% for course in courses %}
+                        {% for subject in subjects %}
                          <tr>
-                            <td>{{course.id}}</td>
+                            <td>{{subject.id}}</td>
                             <td>
                                <h2>
-                                  <a>{{course.name}}</a>
+                                  <a>{{subject.name}}</a>
                                </h2>
                             </td>
-                            <td>{{course.created_at}}</td>
-                            <td>{{course.updated_at}}</td>
+                            <td>{{subject.course.name}}</td>
+                            <td>{{subject.staff.admin.first_name}}&nbsp;{{subject.staff.admin.last_name}}</td>
+                            <td>{{subject.created_at}}</td>
+                            <td>{{subject.updated_at}}</td>
                             <td class="text-right">
                                <div class="actions">
-                                  <a href="{% url 'editcourse' course.id %}" class="btn btn-sm bg-success-light mr-2">
+                                  <a href="{% url 'editSubject' subject.id %}" class="btn btn-sm bg-success-light mr-2">
                                   <i class="fas fa-pen"></i>
                                   </a>
-                                  <a href="{% url 'deletecourse' course.id %}" class="btn btn-sm bg-danger-light">
+                                  <a href="{% url 'deleteSubject' subject.id %}" class="btn btn-sm bg-danger-light">
                                   <i class="fas fa-trash"></i>
                                   </a>
                                </div>

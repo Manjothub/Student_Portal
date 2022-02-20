@@ -1,0 +1,120 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block body %}
+<div class="content container-fluid">
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Edit Teachers</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{% url 'updateTeacher' %}" act enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            {% include 'includes/errormessage.html'%}
+                            <div class="col-12">
+                                <h5 class="form-title"><span>Basic Details</span></h5>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                   <label>Teacher Image</label>
+                                   <input type="file" class="form-control" name="profile_pic">
+                                   <input type="text" class="form-control" name="teacher_id" value="{% for teacher in teachers%} {{teacher.admin.id}} {% endfor %}" hidden >
+                                </div>
+                                </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label> First Name</label>
+                                    <input type="text" class="form-control" name="first_name"  value="{% for teacher in teachers%} {{teacher.admin.first_name}} {% endfor %}">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label> Last Name</label>
+                                    <input type="text" class="form-control" name="last_name"  value="{% for teacher in teachers%} {{teacher.admin.last_name}} {% endfor %}">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label> Username</label>
+                                    <input type="text" class="form-control" name="username" value="{% for teacher in teachers%} {{teacher.admin.username}} {% endfor %}">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                   <label>Password</label>
+                                   <input type="password" class="form-control" name="password" placeholder="Fill only if you want to change the password">
+                                </div>
+                                </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label> Email</label>
+                                    <input type="email" class="form-control" name="email" value="{% for teacher in teachers%} {{teacher.admin.email}} {% endfor %}">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <select class="form-control" name="gender">
+                                        <option>------Select Gender-----</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                        <option>Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Date of Birth</label>
+                                    <input type="date" class="form-control" name="dob_teacher">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Mobile</label>
+                                    <input type="text" class="form-control" name="mobile" value="{% for teacher in teachers%} {{teacher.staff_mobile_no}} {% endfor %}">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Joining Date</label>
+                                    <input type="date" class="form-control" name="join_date">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Qualification</label>
+                                    <input class="form-control" type="text" name="qualification" value="{% for teacher in teachers%} {{teacher.staff_qualification}} {% endfor %}">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Experience</label>
+                                    <input class="form-control" type="text" name="experience" value="{% for teacher in teachers%} {{teacher.staff_experience}} {% endfor %}">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <!-- <input type="text" class="form-control" name="address"> -->
+                                    <textarea name="address" class="form-control" >{% for teacher in teachers%} {{teacher.admin.username}} {% endfor %}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}

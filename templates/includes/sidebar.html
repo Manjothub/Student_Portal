@@ -21,7 +21,7 @@
              <li class="submenu">
                 <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Teachers</span> <span class="menu-arrow"></span></a>
                 <ul>
-                   <li><a href="#">Teacher List</a></li>
+                   <li><a href="{% url 'viewTeacher' %}">Teacher List</a></li>
                    <li><a href="{% url 'addTeacher' %}">Teacher Add</a></li>
                    <!-- <li><a href="edit-teacher.html">Teacher Edit</a></li> -->
                 </ul>
@@ -44,17 +44,15 @@
              <li class="submenu">
                 <a href="#"><i class="fas fa-book-reader"></i><span> Subjects</span> <span class="menu-arrow"></span></a>
                 <ul>
-                   <li><a href="subjects.html">Subject List</a></li>
-                   <li><a href="add-subject.html">Subject Add</a></li>
-                   <li><a href="edit-subject.html">Subject Edit</a></li>
+                   <li><a href="{% url 'viewSubject' %}">Subject List</a></li>
+                   <li><a href="{% url 'addSubject' %}">Subject Add</a></li>
                 </ul>
              </li>
              <li class="submenu">
                <a href="#"><i class="fas fa-business-time"></i><span> Session</span> <span class="menu-arrow"></span></a>
                <ul>
-                  <li><a href="subjects.html">Session List</a></li>
-                  <li><a href="add-subject.html">Session Add</a></li>
-                  <li><a href="edit-subject.html">Session Edit</a></li>
+                  <li><a href="{% url 'viewSession' %}">Session List</a></li>
+                  <li><a href="{% url 'addSession' %}">Session Add</a></li>
                </ul>
             </li>
             <li class="submenu">

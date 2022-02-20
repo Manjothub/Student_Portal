@@ -15,6 +15,23 @@ urlpatterns = [
     path('course/update/',updatecourses,name="updatecourse"),
     path('course/delete/<str:id>',deletecourses,name="deletecourse"),
     
-    path('teacher/add',addTeacher,name="addTeacher")
+    path('teacher/add',addTeacher,name="addTeacher"),
+    path('teacher/view',viewTeacher,name="viewTeacher"),
+    path('teacher/edit/<str:id>',editTeacher,name="editTeacher"),
+    path('teacher/update/',updateTeacher,name="updateTeacher"),
+    path('teacher/delete/<str:id>',deleteTeacher,name="deleteTeacher"),
+    
+    path('subject/add',addSubject,name="addSubject"),
+    path('subject/view',viewSubject,name="viewSubject"),
+    path('subject/edit/<str:id>',editSubject,name="editSubject"),
+    path('subject/update/',updateSubject,name="updateSubject"),
+    path('subject/delete/<str:id>',deleteSubject,name="deleteSubject"),
+    
+    path('session/add',addSession,name="addSession"),
+    path('session/view',viewSession,name="viewSession"),
+    path('session/edit/<str:id>',editSession,name="editSession"),
+    path('session/update',updateSession,name="updateSession"),
+    path('session/delete/<str:id>',deleteSession,name="deleteSession"),
+
     
 ]

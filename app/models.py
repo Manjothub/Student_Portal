@@ -59,4 +59,20 @@ class Staff(models.Model):
     
     def __str__(self):
         return self.admin.username
+
+class Subject(models.Model):
+    name = models.CharField(max_length=100)
+    course = models.ForeignKey(Course,on_delete=models.CASCADE)
+    staff = models.ForeignKey(Staff, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
+    def __str__(self):
+        return self.name
+    
+class Session(models.Model):
+    session_start = models.CharField(max_length=100)
+    session_end = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.session_start + " TO " + self.session_end
