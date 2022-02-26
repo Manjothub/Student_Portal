@@ -19,7 +19,7 @@ def doLogin(request):
             if user_type == '1':
                 return redirect('hodpage')
             elif user_type =='2':
-                return HttpResponse('This is Staff Pannel')
+                return redirect('staffpage')
             elif user_type =='3':
                 return HttpResponse('This is Student Pannel')
             else:

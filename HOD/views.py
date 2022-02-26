@@ -6,7 +6,23 @@ from app .models import *
 
 @login_required(login_url="/")
 def hodpage(request):
-    return render(request,'HOD/home.html')
+    studentcount = Student.objects.all().count()
+    staffcount = Staff.objects.all().count()
+    coursecount = Course.objects.all().count()
+    subjectcount = Subject.objects.all().count()
+    student_male = Student.objects.filter(gender = 'Male').count()
+    student_female = Student.objects.filter(gender = 'Female').count()
+    context ={
+        'studentcount':studentcount,
+        'staffcount':staffcount,
+        'coursecount':coursecount,
+        'subjectcount':subjectcount,
+        'student_male':student_male,
+        'student_female':student_female
+    }
+
+    
+    return render(request,'HOD/home.html',context)
 
 @login_required(login_url="/")
 def addstudents(request):
@@ -389,7 +405,7 @@ def updateSession(request):
             session_start = session_start,
             session_end = session_end
         )
-        print(session)
+
         session.save()
         messages.success(request,'Session Updated Sucessfully')
         return redirect('viewSession')
@@ -399,3 +415,51 @@ def deleteSession(request,id):
     session = Session.objects.get(id=id)
     session.delete()
     return redirect('viewSession')
+
+
+def staffsendnotification(request):
+    staff = Staff.objects.all()
+    text = StaffNotification.objects.all()
+    context ={
+        'staff':staff,
+        'text':text
+    }
+    # print(context)
+    return render(request,'HOD/send_staff_notification.html',context)
+
+def staffsavenotification(request):
+    if request.method == 'POST':
+        staff_id = request.POST.get('staff_id')
+        message = request.POST.get('message')
+        staff = Staff.objects.get(admin = staff_id)
+        notification = StaffNotification(
+            staff_id = staff,
+            message = message
+        )
+        print(notification)
+        notification.save()
+        messages.success(request,'Message Send')
+        return redirect('sendnotification')
+    return redirect('sendnotification')
+
+
+def staffleaveview(request):
+    leaves = StaffLeave.objects.all()
+    context ={
+        'leaves':leaves
+    }
+    return render(request,'HOD/staff_leave_view.html',context)
+
+def staffapproveleave(request,id):
+    leave = StaffLeave.objects.get(id=id)
+    leave.leave_status = 1
+    leave.save()
+    messages.success(request,'Leave Approved')
+    return redirect('leaveview')
+
+def staffdisapproveleave(request):
+    leave = StaffLeave.objects.get(id=id)
+    leave.leave_status = 2
+    leave.save()
+    messages.success(request,'Leave Cancelled')
+    return redirect('leaveview')

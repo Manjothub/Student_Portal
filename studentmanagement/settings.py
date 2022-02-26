@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'app',
     'HOD',
     'Staff',
-    'Student'    
+    'Student',
+    'active_link'    
 
 ]
 

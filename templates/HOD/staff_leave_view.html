@@ -1,0 +1,67 @@
+{% extends "main/base.html" %}
+{% block body %}
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row align-items-center">
+          <div class="col">
+             <h3 class="page-title">Teacher Leave List</h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'hodpage' %}">Dashboard</a></li>
+                <li class="breadcrumb-item active">Leaves</li>
+             </ul>
+          </div>
+          <div class="col-auto text-right float-right ml-auto">
+             <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
+             <a href="{% url 'addcourse' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+          </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+                <div class="table-responsive">
+                   <table id="table_id" class="table table-hover table-center mb-0 ">
+                      <thead>
+                         <tr>
+                            <th>ID</th>
+                            <th>Teacher Name</th>
+                            <th>Leave Date</th>
+                            <th>Message</th>
+                            <th class="text-right">Action</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                        {% for leave in leaves %}
+                         <tr>
+                            <td>{{leave.id}}</td>
+                            <td>{{leave.staff_id}}</td>
+                            <td>{{leave.date}}</td>
+                            <td>{{leave.text}}</td>
+                            <td class="text-right">
+                                <div class="actions">
+                                    {% if leave.leave_status == 0 %}
+                                    <a href="{% url 'leaveapprove' leave.id %}" class="btn btn-success">
+                                        Approve
+                                        </a>
+                                    <a href="{% url 'leavedisapprove' leave.id %}" class="btn btn-danger">
+                                            Disapprove
+                                        </a>
+                                      {% elif leave.leave_status == 1 %}
+                                      <button class="btn btn-success" disabled>Approved</button>
+                                      {% else %}
+                                    <button class="btn btn-danger" disabled> Disapproved</button>
+                                    {% endif %}
+                                </div>
+                             </td>
+                         </tr>
+                         {% endfor %}
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+{% endblock body %}

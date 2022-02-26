@@ -76,3 +76,23 @@ class Session(models.Model):
     
     def __str__(self):
         return self.session_start + " TO " + self.session_end
+    
+class StaffNotification(models.Model):
+    staff_id = models.ForeignKey(Staff,on_delete=models.CASCADE)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    message_status = models.IntegerField(null=True, default=0)
+    
+    def __str__(self):
+        return self.staff_id.admin.first_name     
+    
+class StaffLeave(models.Model):
+    staff_id = models.ForeignKey(Staff,on_delete=models.CASCADE)
+    date = models.CharField(max_length=100)
+    text = models.TextField()
+    leave_status = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add= True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.staff_id.admin.first_name + self.staff_id.admin.last_name

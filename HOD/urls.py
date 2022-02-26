@@ -32,6 +32,10 @@ urlpatterns = [
     path('session/edit/<str:id>',editSession,name="editSession"),
     path('session/update',updateSession,name="updateSession"),
     path('session/delete/<str:id>',deleteSession,name="deleteSession"),
-
     
+    path("staff/send/notification",staffsendnotification,name="sendnotification"),
+    path("staff/save/notification",staffsavenotification,name="savestaffnotification"),
+    path('staff/leave/view',staffleaveview,name="leaveview"),
+    path('staff/leave/approve/<str:id>',staffapproveleave,name="leaveapprove"),
+    path('staff/leave/disapprove/<str:id>',staffdisapproveleave,name="leavedisapprove"),
 ]

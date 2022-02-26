@@ -1,0 +1,56 @@
+{% extends "main/base.html" %}
+{% block body %}
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row align-items-center">
+          <div class="col">
+             <h3 class="page-title">Notification List</h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'hodpage' %}">Dashboard</a></li>
+                <li class="breadcrumb-item active">Notification</li>
+             </ul>
+          </div>
+          <div class="col-auto text-right float-right ml-auto">
+             <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
+             <a href="{% url 'addcourse' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+          </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+                <div class="table-responsive">
+                   <table id="table_id" class="table table-hover table-center mb-0 ">
+                      <thead>
+                         <tr>
+                            <th>Messages</th>
+                            <th>Action </th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                        {% for i in notification %}
+                         <tr>
+                           <td>{{i.message}}</td>
+                           <td class="text-right">
+                               <div class="action">
+                                   {% if i.message_status == 0 %}
+                                   <a class="btn btn-danger" href="{% url 'staffnotifystatus' id=i.id %}">Mark Read</a>
+                                    {% else %}
+                                   <button class="btn btn-danger" disabled="disabled">Mark Read</button>
+                                   {% endif %}
+                                   
+                                   
+                               </div>
+                           </td>
+                         </tr>
+                         {% endfor %}
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+{% endblock body %}
