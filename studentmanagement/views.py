@@ -21,7 +21,7 @@ def doLogin(request):
             elif user_type =='2':
                 return redirect('staffpage')
             elif user_type =='3':
-                return HttpResponse('This is Student Pannel')
+                return redirect('studenthome')
             else:
                 messages.error(request,"Invalid Credentials")
                 return redirect('loginpage')

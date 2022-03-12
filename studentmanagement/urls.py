@@ -27,5 +27,8 @@ urlpatterns = [
     #staff Urls
     path('/staff/',include('Staff.urls')),
     
+    #student Urls
+    path('student/',include('Student.urls'))
+    
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

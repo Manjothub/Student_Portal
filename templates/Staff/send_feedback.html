@@ -1,0 +1,106 @@
+{% extends "main/base.html" %}
+{% block css %}{% endblock css %}
+{% load static %}
+{% block body %}
+<div class="content container-fluid">
+    <div class="page-header">
+        <div class="row align-items-center">
+           <div class="col-auto text-right float-right ml-auto">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" type="button"><i class="fas fa-comment"></i> &nbsp;Feedback History</button>
+           </div>
+        </div>
+     </div>
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Send Feedback</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'hodpage' %}">Feedback</a></li>
+                    <li class="breadcrumb-item active">Send Feedback</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{% url 'stafffeedbacksave' %}" >
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="form-title"><span>Send Feedback</span></h5>
+                                {% include 'includes/errormessage.html'%}
+                            </div>
+                            <div class="col-sm-11">
+                                <div class="form-group">
+                                    <label>Send Feedback</label>
+                                    <textarea class="form-control" name="feedback" style="height: 250px;" placeholder="Enter Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Send Feedback</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Large modal -->
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="">Apply Leave History</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+                <div class="table-responsive">
+                   <table id="table_id" class="table table-hover table-center mb-0 ">
+                      <thead>
+                         <tr>
+                            <th>ID</th>
+                            <th>Feedback</th>
+                            <th>Reply</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                        {% for feed in feedbacks %}
+                         <tr>
+                            <td>{{feed.id}}</td>
+                            <td>{{feed.feedback}}</td>
+
+                                {% if feed.feedback_reply == "" %}
+                            <td>
+                                <span class="badge badge-danger">No Reply</span>
+                            </td>
+                                {% else %}
+                            <td>
+                                {{feed.feedback_reply}}
+                                {% endif %}
+                            </td>
+                         </tr>
+                         {% endfor %}
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+          </div>
+       </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

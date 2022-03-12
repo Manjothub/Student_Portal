@@ -1,0 +1,14 @@
+username = manjotsingh
+password = 1234
+email = themanjot55@gmail.com
+
+
+student name
+username = rahul22
+pass = 1234
+email = rahul11@gmail.com
+
+Staff Name
+username=s1@gmail.com
+pass = 1234
+email = s1@gmail.com

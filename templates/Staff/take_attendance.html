@@ -1,0 +1,60 @@
+{% extends "main/base.html" %}
+{% block body %}
+<div class="content container-fluid">
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Take Attendance</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Take Attendance</a></li>
+                    <li class="breadcrumb-item active">Attendance</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="?action=get_student">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="form-title"><span>Take Attendance</span></h5>
+                                {% include 'includes/errormessage.html'%}
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Subject</label>
+                                    <select class="form-control" name="course_id" required>
+                                      <option>Select Subject</option>
+                                      {% for i in subjects %}
+                                       <option value="{{i.id}}">{{i.name}}</option>
+                                      {% endfor %}
+                                    </select>
+                                 </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Session Year</label>
+                                    <select class="form-control" name="staff_id" required>
+                                      <option>Select Year</option>
+                                      {% for i in session_year %}
+                                       <option value="{{i.id}}">{{i.session_start}}TO {{i.session_end}}</option>
+                                      {% endfor %}
+                                    </select>
+                                 </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Fetch Students</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock body %}

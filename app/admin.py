@@ -7,11 +7,16 @@ class UserModel(UserAdmin):
     list_display=['username','user_type']
 
 admin.site.register(Course)
-admin.site.register(Session_Year)
 admin.site.register(Student)
 admin.site.register(Staff)
 admin.site.register(Subject)
 admin.site.register(Session)
 admin.site.register(StaffNotification)
 admin.site.register(StaffLeave)
+admin.site.register(StaffFeedback)
+admin.site.register(StudentNotification)
+admin.site.register(StudentFeedback)
+admin.site.register(StudentLeave)
+admin.site.register(Attendance)
+admin.site.register(AttendanceReport)
 

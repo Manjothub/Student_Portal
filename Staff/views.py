@@ -46,3 +46,35 @@ def staffsendleave(request):
         leave.save()
         messages.success(request,'Application Send Sucessfully')
     return render(request,'Staff/apply_leave.html')
+
+def stafffeedbacks(request):
+    id = Staff.objects.get(admin= request.user.id)
+    feedbacks = StaffFeedback.objects.filter(staff_id = id )
+    context ={
+        'feedbacks':feedbacks
+    }
+    return render(request,'Staff/send_feedback.html',context)
+
+def staffsavefeedbacks(request):
+    if request.method == 'POST':
+        feedback = request.POST.get('feedback')
+        staff = Staff.objects.get(admin = request.user.id)
+        feedbacks = StaffFeedback(
+            staff_id = staff,
+            feedback =feedback
+        )
+        feedbacks.save()
+        messages.success(request,'Feedback Send Sucessfully')
+    return redirect('stafffeedback')
+
+def stafftakeattendance(request):
+    staff_id = Staff.objects.get(admin = request.user.id)
+    subjects = Subject.objects.filter(staff=staff_id)
+    session_year = Session.objects.all()
+    action = request.GET.get('action')
+    print(action)
+    context ={
+        'subjects':subjects,
+        'session_year' :session_year,
+    }
+    return render(request,'Staff/take_attendance.html',context)

@@ -60,7 +60,7 @@ def addstudents(request):
             user.set_password(password)
             user.save()
             course = Course.objects.get(id= course)
-            session =Session_Year.objects.get(id=session)
+            session =Session.objects.get(id=session)
             students= Student(
                 admin=user,
                 student_dob =birth_date,
@@ -76,7 +76,7 @@ def addstudents(request):
             messages.success(request,user.first_name + "  " + user.last_name + '  successfully Saved')
             return redirect('addstudent')
     course= Course.objects.all()
-    session_year = Session_Year.objects.all()
+    session_year = Session.objects.all()
     context = {
         'course' :course,
         'session_year': session_year,
@@ -92,7 +92,7 @@ def viewstudents(request):
 def editstudents(request,id):
     student=Student.objects.filter(id=id)
     course=Course.objects.all()
-    session =Session_Year.objects.all()
+    session =Session.objects.all()
     context ={
         'students':student,
         'course':course,
@@ -139,7 +139,7 @@ def updatestudents(request):
         student.present_address = present_address
         course=Course.objects.get(id = course)
         student.course_id = course
-        session_year = Session_Year.objects.get(id = session)   
+        session_year = Session.objects.get(id = session)   
         student.session_id = session_year
         student.save()
         messages.success(request,'Record Successfully Updated !')     
@@ -436,7 +436,6 @@ def staffsavenotification(request):
             staff_id = staff,
             message = message
         )
-        print(notification)
         notification.save()
         messages.success(request,'Message Send')
         return redirect('sendnotification')
@@ -463,3 +462,80 @@ def staffdisapproveleave(request):
     leave.save()
     messages.success(request,'Leave Cancelled')
     return redirect('leaveview')
+
+def stafffeedback(request):
+    staff = StaffFeedback.objects.all()
+    context ={
+        'stafffeedback':staff
+    }
+    return render (request,'HOD/staff_feedback.html',context)
+
+def staffsendfeedback(request):
+    if request.method == 'POST':
+        feedback_id = request.POST.get('feedback_id')
+        reply = request.POST.get('feedback_msg')
+        feedback = StaffFeedback.objects.get(id=feedback_id)
+        feedback.feedback_reply = reply
+        feedback.save()
+        messages.success(request,'Reply Send Sucessfully')
+    return redirect('stafffeedbackreply')
+
+def studentsendnotification(request):
+    student = Student.objects.all()
+    notify = StudentNotification.objects.all()
+    context ={
+        'student':student,
+        'notify':notify
+    }
+    return render(request,'HOD/send_student_notification.html',context)
+
+def studentsavenotification(request):
+    if request.method == 'POST':
+        student_id = request.POST.get('student_id')
+        text = request.POST.get('message')
+        student = Student.objects.get(admin = student_id)
+        notify = StudentNotification(
+            student_id =student,
+            message= text
+        )
+        notify.save()
+        messages.success(request,'Message Send')
+    return redirect('studentsendnotification')
+
+def studentviewleave(request):
+    leaves = StudentLeave.objects.all()
+    context ={
+        'leaves':leaves
+    }
+    return render(request,'HOD/student_leave_view.html',context)
+
+def studentapproveleave(request,id):
+    leave = StudentLeave.objects.get(id=id)
+    leave.leave_status = 1
+    leave.save()
+    messages.success(request,'Leave Approved')
+    return redirect('studentviewleave')
+
+def studentdisapproveleave(request,id):
+    leave = StudentLeave.objects.get(id=id)
+    leave.leave_status = 2
+    leave.save()
+    messages.success(request,'Leave Cancelled')
+    return redirect('studentviewleave')
+
+def studentfeedback(request):
+    studentfeedback = StudentFeedback.objects.all()
+    context ={
+        'studentfeedback':studentfeedback
+    }
+    return render (request,'HOD/student_feedback.html',context)
+
+def studentsendfeedback(request):
+    if request.method == 'POST':
+        feedback_id = request.POST.get('feedback_id')
+        reply = request.POST.get('msg')
+        feedback = StudentFeedback.objects.get(id=feedback_id)
+        feedback.text_reply = reply
+        feedback.save()
+        messages.success(request,'Reply Send Sucessfully')
+    return redirect('studentfeedbackreply')

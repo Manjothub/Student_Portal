@@ -38,4 +38,16 @@ urlpatterns = [
     path('staff/leave/view',staffleaveview,name="leaveview"),
     path('staff/leave/approve/<str:id>',staffapproveleave,name="leaveapprove"),
     path('staff/leave/disapprove/<str:id>',staffdisapproveleave,name="leavedisapprove"),
+    path('staff/feedback/',stafffeedback,name="stafffeedbackreply"),
+    path('staff/send/feedback/',staffsendfeedback,name="sendreply"),
+    
+    path('student/send-notification',studentsendnotification,name="studentsendnotification"),
+    path('student/save/notification',studentsavenotification,name="savestudentnotification"),
+    path('student/leave/view',studentviewleave,name="studentviewleave"),
+    path('student/leave/approve/<str:id>',studentapproveleave,name="studentleaveapprove"),
+    path('student/leave/disapprove/<str:id>',studentdisapproveleave,name="studentleavedisapprove"),
+    path('student/feedback/',studentfeedback,name="studentfeedbackreply"),
+    path('student/send/feedback/',studentsendfeedback,name="studentsendreply"),
+    
+    
 ]
