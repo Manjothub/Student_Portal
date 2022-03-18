@@ -17,6 +17,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
+                    {% if action is None %}
                     <form method="POST" action="?action=get_student">
                         {% csrf_token %}
                         <div class="row">
@@ -27,7 +28,7 @@
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label>Subject</label>
-                                    <select class="form-control" name="course_id" required>
+                                    <select class="form-control" name="subject_id" required>
                                       <option>Select Subject</option>
                                       {% for i in subjects %}
                                        <option value="{{i.id}}">{{i.name}}</option>
@@ -38,10 +39,10 @@
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label>Session Year</label>
-                                    <select class="form-control" name="staff_id" required>
+                                    <select class="form-control" name="session_year_id" required>
                                       <option>Select Year</option>
                                       {% for i in session_year %}
-                                       <option value="{{i.id}}">{{i.session_start}}TO {{i.session_end}}</option>
+                                       <option value="{{i.id}}">{{i.session_start}} TO {{i.session_end}}</option>
                                       {% endfor %}
                                     </select>
                                  </div>
@@ -51,6 +52,42 @@
                             </div>
                         </div>
                     </form>
+                    {% else %}
+                    <form method="POST" action="{% url 'addSubject' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="form-title"><span>Subject Information</span></h5>
+                                {% include 'includes/errormessage.html'%}
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Subject</label>
+                                    <select class="form-control" name="course_id" required>
+                                       <option value="{{get_subject.id}}">{{get_subject}}</option>
+                                    </select>
+                                 </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Staff</label>
+                                    <select class="form-control" name="staff_id" required>
+                                       <option value="{{get_session_year.id}}">{{get_session_year}}</option>
+                                    </select>
+                                 </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Attendance Data</label>
+                                    <input type="date" class="form-control">
+                                 </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
