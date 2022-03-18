@@ -8,6 +8,11 @@ username = rahul22
 pass = 1234
 email = rahul11@gmail.com
 
+
+username = reena123
+email = reena123@gmail.com
+pass = 12345
+
 Staff Name
 username=s1@gmail.com
 pass = 1234
