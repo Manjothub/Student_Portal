@@ -19,4 +19,5 @@ admin.site.register(StudentFeedback)
 admin.site.register(StudentLeave)
 admin.site.register(Attendance)
 admin.site.register(AttendanceReport)
+admin.site.register(StudentResult)
 

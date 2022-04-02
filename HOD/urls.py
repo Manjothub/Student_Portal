@@ -48,6 +48,7 @@ urlpatterns = [
     path('student/leave/disapprove/<str:id>',studentdisapproveleave,name="studentleavedisapprove"),
     path('student/feedback/',studentfeedback,name="studentfeedbackreply"),
     path('student/send/feedback/',studentsendfeedback,name="studentsendreply"),
+    path('student/view/attendance',viewattendance,name="viewattendance")
     
     
 ]

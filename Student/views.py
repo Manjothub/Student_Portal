@@ -65,3 +65,22 @@ def studentsendleave(request):
         leave.save()
         messages.success(request,'Application Send Sucessfully')
     return redirect('studentleaveview')
+
+def studentviewattendance(request):
+    student = Student.objects.get(admin= request.user.id)
+    subjects = Subject.objects.filter(course = student.course_id)
+    action = request.GET.get('action')
+    get_subject = None
+    attendance_report = None
+    if action is not None:
+        if request.method=='POST':
+            subject_id = request.POST.get('subject_id')
+            get_subject = Subject.objects.get(id= subject_id)
+            attendance_report = AttendanceReport.objects.filter(student_id= student,attendance_id__subject_id=subject_id)
+    context ={
+        'subjects':subjects,
+        'action':action,
+        'get_subject':get_subject,
+        'attendance_report':attendance_report
+    }
+    return render(request,'Student/view_attendance.html',context)

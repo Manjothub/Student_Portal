@@ -539,3 +539,34 @@ def studentsendfeedback(request):
         feedback.save()
         messages.success(request,'Reply Send Sucessfully')
     return redirect('studentfeedbackreply')
+
+def viewattendance(request):
+    subject = Subject.objects.all()
+    session_year = Session.objects.all()
+    action = request.GET.get('action')
+    get_subject = None
+    get_session_year = None
+    attendance_date = None
+    report= None
+    if action is not None:
+        if request.method == 'POST':
+            subject_id = request.POST.get('subject_id')
+            session_year_id = request.POST.get('session_year_id')
+            attendance_date = request.POST.get('attendance_date')
+            get_subject = Subject.objects.get(id=subject_id)
+            get_session_year = Session.objects.get(id = session_year_id)
+            attendance = Attendance.objects.filter(subject_id = get_subject,attendance_date =attendance_date)
+            for i in attendance:
+                attendance_id = i.id
+                report = AttendanceReport.objects.filter(attendance_id = attendance_id)
+            
+    context ={
+        'subjects':subject,
+        'sessions':session_year,
+        'action':action,
+        'get_subject':get_subject,
+        'get_session_year':get_session_year,
+        'attendance_date':attendance_date,
+        'reports':report
+    }
+    return render(request,'HOD/view_attendance.html',context)

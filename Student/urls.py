@@ -8,6 +8,7 @@ urlpatterns = [
     path('feedback',studentfeedback,name="studentfeedbacks"),
     path('feedback/save',studentsavefeedback,name="studentfeedbacksave"),
     path('student/leave/view',studentleaveview,name="studentleaveview"),
-    path('student/add/leave',studentsendleave,name="studentleave")
+    path('student/add/leave',studentsendleave,name="studentleave"),
+    path('student/view/attendance',studentviewattendance,name="studentattendance"),
 ]
 

@@ -3,6 +3,12 @@ password = 1234
 email = themanjot55@gmail.com
 
 
+student name 
+username= manjot singh
+pass = 1234
+email = themanjot08@gmail.com
+
+
 student name
 username = rahul22
 pass = 1234

@@ -12,4 +12,6 @@ urlpatterns = [
     path('staff/takeattendance',stafftakeattendance,name="takeattendance"),
     path('staff/saveattendance',staffsaveattendance,name="saveattendance"),
     path('staff/viewattendance',staffviewattendance,name="viewstudentattendance"),
+    path('staff/add/result',staffaddresult,name="studentresult"),
+    path('staff/save/result',staffsaveresult,name="studentsaveresult"),
 ]
